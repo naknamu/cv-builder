@@ -1,7 +1,10 @@
-const Output = () => {
+const Output = (props) => {
+    console.log(props);
     return ( 
-        <div className="output">
-            <p>HELLO WORLD!</p>
+        <div>
+            <div className="name">
+                <h1>{props.fullName}</h1>
+            </div>
         </div>
      );
 }

@@ -1,6 +1,5 @@
 import AddEntry from "./add-entry";
 import Date from "./date";
-import Form from "./form";
 
 const Experience = () => {
     return ( 
@@ -11,7 +10,6 @@ const Experience = () => {
             <textarea name="description" id="description" cols="30" rows="10" placeholder="Main tasks of your job"></textarea>
             <Date/>
             <AddEntry/>
-            <Form/>
         </div>
      );
 }

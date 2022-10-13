@@ -1,6 +1,5 @@
 import AddEntry from "./add-entry";
 import Date from "./date";
-import Form from "./form";
 
 const Education = () => {
     return ( 
@@ -10,7 +9,6 @@ const Education = () => {
             <input type="text" name="titleOfStudy" id="titleOfStudy" placeholder="Title of Study" />
             <Date/>
             <AddEntry/>
-            <Form/>
         </div>
      );
 }
