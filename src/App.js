@@ -10,41 +10,26 @@ class App extends Component {
   constructor() {
     super();
 
-    this.firstName = this.firstName.bind(this);
-    this.lastName = this.lastName.bind(this);
-    this.fullName = this.fullName.bind(this);
+    this.changeFirstName = this.changeFirstName.bind(this);
+    this.changeLastName = this.changeLastName.bind(this);
  
     this.state = {
       firstName: '',
-      lastName: '',
-      fullName: ''
+      lastName: ''
     }
 
   }
 
-  firstName = (event) => {
+  changeFirstName = (event) => {
     this.setState({
       firstName : event.target.value,
-      fullName : event.target.value
     });
   }
 
-  lastName = (event) => {
+  changeLastName = (event) => {
     this.setState({
-      lasttName : event.target.value
+      lastName : event.target.value
     });
-  }
-
-  fullName = () => {
-    let fullName;
-    
-    this.setState({
-      fullName : this.state.firstName + " " + this.state.lastName
-    })
-
-    fullName = this.state.fullName;
-
-    console.log(fullName);
   }
 
   render() {
@@ -53,13 +38,13 @@ class App extends Component {
         <Header/>
         <div className="content">
           <div className="input">
-            <General firstName={this.firstName} lastName={this.lastName}/>
+            <General changeFirstName={this.changeFirstName} changeLastName={this.changeLastName}/>
             <Education/>
             <Experience/>
             <Helper/>
           </div>
           <div className="output">
-            <Output fullName={this.fullName}/>
+            <Output fullName={this.state.firstName + " " + this.state.lastName}/>
           </div>
         </div>
       </div>

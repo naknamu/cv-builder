@@ -7,6 +7,11 @@
     font-family: 'Roboto', sans-serif;
 }
 
+:root{
+    --formColor: #dadada;
+    --head: #15803d;
+}
+
 /* @media only screen and (min-width: 600px) {
     html, body {
         background-color: black;
@@ -27,18 +32,22 @@
     background-color: black;
     color: white;
     padding: 20px;
-    text-align: center;
+    display: flex;
+    /* place-content: center; */
+    gap: 10px;
+    font-size: 42px;
+    font-weight: bold;
 }
 
 .content{
     padding: 20px;
-    background-color: black;
+    background-color: #404040;
     display: flex;
 }
 
 .general, .educ, .exp{
-    background-color: rgb(51, 51, 51);
-    color: white;
+    background-color: var(--formColor);
+    color: black;
     margin: 10px;
     padding: 20px;
     border-radius: 8px;
@@ -50,8 +59,11 @@
 input{
     padding: 8px;
     border-radius: 4px;
-    outline: none;
     border: 0;
+}
+
+input:focus{
+    outline: 2px solid var(--head);
 }
 
 button{
@@ -87,11 +99,80 @@ form{
 textarea{
     border-radius: 4px;
     padding: 8px;
+    border: none;
+    outline: none;
 }
 
 .output{
     background-color: white;
-    padding: 10px;
     width: 100%;
     margin: 10px;
+}
+
+.output-wrapper{
+    height: 100%;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 35%);
+}
+
+.head{
+    background-color: var(--head);
+    padding: 30px;
+    color: white;
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.maincontent{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    height: 90%;
+}
+
+.first-column{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.maincontent .title{
+    border-bottom: 1px solid #d1d5db;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+.second-column{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.first-column .experience .description, .first-column .education .description{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 3fr;
+}
+
+.description>div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.second-column{
+    background-color: #e5e7eb;
+}
+
+.second-column>div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.output img{
+    width: 100%;
+    
 }
