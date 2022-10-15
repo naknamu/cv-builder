@@ -1,13 +1,11 @@
 import avatar from "../image/empty_avatar.png"
 
-const Output = (props) => {
-
-    const {fullName, address, role, email, phone} = props;
+const OutputSample = (props) => {
     return ( 
         <div className="output-wrapper">
             <div className="head">
-                <h1>{fullName}</h1>
-                <h3>{role}</h3>
+                <h1>John Doe</h1>
+                <h3>Web Developer</h3>
             </div>
             <div className="maincontent">
                 <div className="first-column">
@@ -42,15 +40,15 @@ const Output = (props) => {
                         <h4 className="title">Contact Info</h4>
                         <div>   
                             <h4>Address</h4>
-                            <div>{address}</div>
+                            <div>123 Fake Street, Ph</div>
                         </div>
                         <div>
                             <h4>Phone</h4>
-                            <div>{phone}</div>
+                            <div>8888-888</div>
                         </div>
                         <div>
                             <h4>Email</h4>
-                            <div>{email}</div>
+                            <div>notafake@email.com</div>
                         </div>
                     </div>
                 </div>
@@ -59,4 +57,4 @@ const Output = (props) => {
      );
 }
  
-export default Output;
+export default OutputSample;

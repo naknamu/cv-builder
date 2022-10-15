@@ -12,39 +12,80 @@ class App extends Component {
 
     this.changeFirstName = this.changeFirstName.bind(this);
     this.changeLastName = this.changeLastName.bind(this);
+    this.changeAddress = this.changeAddress.bind(this);
+    this.changeRole = this.changeRole.bind(this);
+    this.changeEmail = this.changeEmail.bind(this);
+    this.changePhone = this.changePhone.bind(this);
  
     this.state = {
       firstName: '',
-      lastName: ''
+      lastName: '',
+      address: '',
+      role: '',
+      email: '',
+      phone: ''
     }
 
   }
 
-  changeFirstName = (event) => {
+  changeFirstName = (e) => {
     this.setState({
-      firstName : event.target.value,
+      firstName : e.target.value,
     });
   }
 
-  changeLastName = (event) => {
+  changeLastName = (e) => {
     this.setState({
-      lastName : event.target.value
+      lastName : e.target.value
     });
+  }
+
+  changeAddress = (e) => {
+    this.setState({
+      address : e.target.value
+    })
+  }
+
+  changeRole = (e) => {
+    this.setState({
+      role : e.target.value
+    })
+  }
+
+  changeEmail = (e) => {
+    this.setState({
+      email : e.target.value
+    })
+  }
+
+  changePhone = (e) => {
+    this.setState({
+      phone : e.target.value
+    })
   }
 
   render() {
+
+    const {changeFirstName, changeLastName, changeAddress, changeRole, changeEmail, changePhone} = this;
+    const {firstName, lastName, address, role, email, phone} = this.state;
+
     return (
       <div className="App">
         <Header/>
         <div className="content">
           <div className="input">
-            <General changeFirstName={this.changeFirstName} changeLastName={this.changeLastName}/>
+            <General changeFirstName={changeFirstName} changeLastName={changeLastName}
+              changeAddress={changeAddress} changeRole={changeRole} changeEmail={changeEmail}
+              changePhone={changePhone}
+            />
             <Education/>
             <Experience/>
             <Helper/>
           </div>
           <div className="output">
-            <Output fullName={this.state.firstName + " " + this.state.lastName}/>
+            <Output fullName={firstName + " " + lastName}
+              address={address} role={role} email={email} phone={phone}
+            />
           </div>
         </div>
       </div>
