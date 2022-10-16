@@ -1,8 +1,10 @@
-import avatar from "../image/empty_avatar.png"
+
 
 const Output = (props) => {
 
-    const {fullName, address, role, email, phone} = props;
+    const {fullName, address, role, email, phone, user_avatar} = props;
+    const {company, comp_address, position, jobTask, jobFrom, jobTo} = props;
+    const {school, school_address, degree, schoolFrom} = props;
     return ( 
         <div className="output-wrapper">
             <div className="head">
@@ -14,30 +16,28 @@ const Output = (props) => {
                     <div className="experience">
                         <h4 className="title">Experience</h4>        
                         <div className="description">
-                            <span>2018-Current</span>
+                            <h4>{jobFrom} - {jobTo}</h4>
                             <div>
-                                <div>Web Developer</div>
-                                <div>Example Company, Rizal Street</div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div>
+                                <h4>{position}</h4>
+                                <div className="company">{company} - {comp_address}</div>
+                                <div>{jobTask}</div>
                             </div>
                         </div>
                     </div>
                     <div className="education">
                         <h4 className="title">Education</h4>
                         <div className="description">
-                            <span>2015-2016</span>
+                            <h4>{schoolFrom} - 2016</h4>
                             <div>
-                                <div>Great University - Fake Address</div>
-                                <div>Degree: Computer Science</div>
-                                <div>Web Development</div>
+                                <div><b>{school}</b> - {school_address}</div>
+                                <div><b>Degree: </b>{degree}</div>
+                                {/* <div>Web Development</div> */}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="second-column">
-                    <img src={avatar} alt="your_picture" />
+                    <img src={user_avatar} alt="your_picture" />
                     <div>
                         <h4 className="title">Contact Info</h4>
                         <div>   
