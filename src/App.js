@@ -31,6 +31,9 @@ class App extends Component {
     this.changeSchoolAdd = this.changeSchoolAdd.bind(this);
     this.changeDegree = this.changeDegree.bind(this);
     this.changeSchoolFrom = this.changeSchoolFrom.bind(this);
+    this.changeSchoolTo = this.changeSchoolTo.bind(this);
+    //
+    this.addExp = this.addExp.bind(this);
  
     this.state = {
       firstName: '',
@@ -52,6 +55,7 @@ class App extends Component {
       school_address: '',
       degree: '',
       schoolFrom: '',
+      schoolTo: '',
     }
 
   }
@@ -171,6 +175,16 @@ class App extends Component {
     })
   }
 
+  changeSchoolTo = (e) => {
+    this.setState({
+      schoolTo: e.target.value
+    })
+  }
+  /*ENTRY*/
+  addExp = (e) => {
+    
+  }
+
   render() {
     //general info
     const {changeFirstName, changeLastName, changeAddress, changeRole, changeEmail, 
@@ -180,8 +194,8 @@ class App extends Component {
     const {changeCompany, changeCompAddress, changePosition, changeJobTask, changeJobFrom, changeJobTo} = this;
     const {company, comp_address, position, jobTask, jobFrom, jobTo} = this.state;
     //educational
-    const {changeSchool, changeSchoolAdd, changeDegree, changeSchoolFrom} = this;
-    const {school, school_address, degree, schoolFrom} = this.state;
+    const {changeSchool, changeSchoolAdd, changeDegree, changeSchoolFrom, changeSchoolTo} = this;
+    const {school, school_address, degree, schoolFrom, schoolTo} = this.state;
 
     return (
       <div className="App">
@@ -197,14 +211,14 @@ class App extends Component {
               changeJobTo={changeJobTo}
             />
             <Education changeSchool={changeSchool} changeSchoolAdd={changeSchoolAdd} 
-            changeDegree={changeDegree} changeSchoolFrom={changeSchoolFrom}/>
+            changeDegree={changeDegree} changeSchoolFrom={changeSchoolFrom} changeSchoolTo={changeSchoolTo}/>
             <Helper/>
           </div>
           <div className="output">
             <Output fullName={firstName + " " + lastName}
               address={address} role={role} email={email} phone={phone} user_avatar={user_avatar}
               company={company} comp_address={comp_address} position={position} jobTask={jobTask} jobFrom={jobFrom} jobTo={jobTo}
-              school={school} school_address={school_address} degree={degree} schoolFrom={schoolFrom}
+              school={school} school_address={school_address} degree={degree} schoolFrom={schoolFrom} schoolTo={schoolTo}
             />
           </div>
         </div>

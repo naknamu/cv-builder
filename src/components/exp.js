@@ -1,10 +1,9 @@
-import AddEntry from "./add-entry";
-import Date from "./date";
+// import AddEntry from "./add-entry";
 
 const Experience = (props) => {
 
     const {changeCompany, changeCompAddress, changePosition, changeJobTask, changeJobFrom, changeJobTo} = props;
-
+    const {addExp} = props;
     return ( 
         <div className="exp">
             <h3>Practical Experience</h3>
@@ -12,8 +11,11 @@ const Experience = (props) => {
             <input type="text" name="address" id="address" placeholder="Address" onChange={changeCompAddress} />
             <input type="text" name="position" id="position" placeholder="Position Title" onChange={changePosition} />
             <textarea name="description" id="description" cols="30" rows="10" placeholder="Main tasks of your job" onChange={changeJobTask}></textarea>
-            <Date changeJobFrom={changeJobFrom} changeJobTo={changeJobTo}/>
-            <AddEntry/>
+            <div className="date">
+            <input type="text" name="dateFrom" placeholder="From" onChange={changeJobFrom}/>
+            <input type="text" name="dateTo" placeholder="To" onChange={changeJobTo}/>
+            </div>
+            <button className="entry" onClick={addExp}>Add Entry</button>
         </div>
      );
 }

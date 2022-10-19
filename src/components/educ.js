@@ -1,9 +1,8 @@
 import AddEntry from "./add-entry";
-import Date from "./date";
 
 const Education = (props) => {
 
-    const {changeSchool, changeSchoolAdd, changeDegree, changeSchoolFrom} = props;
+    const {changeSchool, changeSchoolAdd, changeDegree, changeSchoolFrom, changeSchoolTo} = props;
 
     return ( 
         <div className="educ">
@@ -11,7 +10,10 @@ const Education = (props) => {
             <input type="text" name="school" id="school" placeholder="School Name" onChange={changeSchool} />
             <input type="text" name="address" id="address" placeholder="Address" onChange={changeSchoolAdd} />
             <input type="text" name="degree" id="degree" placeholder="Degree" onChange={changeDegree} />
-            <Date changeSchoolFrom={changeSchoolFrom}/>
+            <div className="date">
+            <input type="text" name="dateFrom" placeholder="From" onChange={changeSchoolFrom}/>
+            <input type="text" name="dateTo" placeholder="To" onChange={changeSchoolTo}/>
+            </div>
             <AddEntry/>
         </div>
      );

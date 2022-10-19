@@ -4,7 +4,7 @@ const Output = (props) => {
 
     const {fullName, address, role, email, phone, user_avatar} = props;
     const {company, comp_address, position, jobTask, jobFrom, jobTo} = props;
-    const {school, school_address, degree, schoolFrom} = props;
+    const {school, school_address, degree, schoolFrom, schoolTo} = props;
     return ( 
         <div className="output-wrapper">
             <div className="head">
@@ -27,9 +27,10 @@ const Output = (props) => {
                     <div className="education">
                         <h4 className="title">Education</h4>
                         <div className="description">
-                            <h4>{schoolFrom} - 2016</h4>
+                            <h4>{schoolFrom} - {schoolTo}</h4>
                             <div>
-                                <div><b>{school}</b> - {school_address}</div>
+                                <div><b>{school}</b></div>
+                                <div>{school_address}</div>
                                 <div><b>Degree: </b>{degree}</div>
                                 {/* <div>Web Development</div> */}
                             </div>
