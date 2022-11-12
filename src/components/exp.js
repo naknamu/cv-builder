@@ -3,7 +3,7 @@
 const Experience = (props) => {
 
     const {changeCompany, changeCompAddress, changePosition, changeJobTask, changeJobFrom, changeJobTo} = props;
-    const {addExp} = props;
+    // console.log(props);
     return ( 
         <div className="exp">
             <h3>Practical Experience</h3>
@@ -15,7 +15,6 @@ const Experience = (props) => {
             <input type="text" name="dateFrom" placeholder="From" onChange={changeJobFrom}/>
             <input type="text" name="dateTo" placeholder="To" onChange={changeJobTo}/>
             </div>
-            <button className="entry" onClick={addExp}>Add Entry</button>
         </div>
      );
 }

@@ -1,10 +1,11 @@
-
+import OutputExperience from './out-exp'
 
 const Output = (props) => {
 
     const {fullName, address, role, email, phone, user_avatar} = props;
     const {company, comp_address, position, jobTask, jobFrom, jobTo} = props;
     const {school, school_address, degree, schoolFrom, schoolTo} = props;
+    const {newExp} = props;
     return ( 
         <div className="output-wrapper">
             <div className="head">
@@ -15,14 +16,26 @@ const Output = (props) => {
                 <div className="first-column">
                     <div className="experience">
                         <h4 className="title">Experience</h4>        
-                        <div className="description">
-                            <h4>{jobFrom} - {jobTo}</h4>
-                            <div>
-                                <h4>{position}</h4>
-                                <div className="company">{company} - {comp_address}</div>
-                                <div>{jobTask}</div>
-                            </div>
-                        </div>
+                        <OutputExperience 
+                        company={company} 
+                        comp_address={comp_address}
+                        position={position}
+                        jobTask={jobTask}
+                        jobFrom={jobFrom}
+                        jobTo={jobTo}
+                        />
+                        
+                        {newExp && 
+                        <OutputExperience 
+                        company={company} 
+                        comp_address={comp_address}
+                        position={position}
+                        jobTask={jobTask}
+                        jobFrom={jobFrom}
+                        jobTo={jobTo}
+                        />}
+
+
                     </div>
                     <div className="education">
                         <h4 className="title">Education</h4>

@@ -6,6 +6,7 @@ import Helper from "./components/helper";
 import Output from "./components/output";
 import React, { Component } from "react";
 import avatar from "../src/image/empty_avatar.png"
+import uniqid from "uniqid";
 
 class App extends Component {
   constructor() {
@@ -33,7 +34,7 @@ class App extends Component {
     this.changeSchoolFrom = this.changeSchoolFrom.bind(this);
     this.changeSchoolTo = this.changeSchoolTo.bind(this);
     //
-    this.addExp = this.addExp.bind(this);
+    this.handleAddEntry = this.handleAddEntry.bind(this);
  
     this.state = {
       firstName: '',
@@ -50,6 +51,8 @@ class App extends Component {
       jobTask: '',
       jobFrom: '',
       jobTo: '',
+      newExp: [],
+      id: uniqid(),
 
       school: '',
       school_address: '',
@@ -181,8 +184,12 @@ class App extends Component {
     })
   }
   /*ENTRY*/
-  addExp = (e) => {
-    
+  handleAddEntry = () => {
+    console.log('new exp:' + this.state.newExp);
+     this.setState({
+       newExp: this.state.newExp.concat([this.state.id]),
+       id: uniqid()
+     })
   }
 
   render() {
@@ -192,7 +199,8 @@ class App extends Component {
     const {firstName, lastName, address, role, email, phone, user_avatar} = this.state;
     //practical exp
     const {changeCompany, changeCompAddress, changePosition, changeJobTask, changeJobFrom, changeJobTo} = this;
-    const {company, comp_address, position, jobTask, jobFrom, jobTo} = this.state;
+    const {company, comp_address, position, jobTask, jobFrom, jobTo, newExp} = this.state;
+    const {handleAddEntry} = this;
     //educational
     const {changeSchool, changeSchoolAdd, changeDegree, changeSchoolFrom, changeSchoolTo} = this;
     const {school, school_address, degree, schoolFrom, schoolTo} = this.state;
@@ -202,23 +210,34 @@ class App extends Component {
         <Header/>
         <div className="content">
           <div className="input">
+
             <General changeFirstName={changeFirstName} changeLastName={changeLastName}
               changeAddress={changeAddress} changeRole={changeRole} changeEmail={changeEmail}
               changePhone={changePhone} uploadPhoto={uploadPhoto} getImage={getImage}/>
+            
             <Experience changeCompany={changeCompany} changeCompAddress={changeCompAddress} 
               changePosition={changePosition} changeJobTask={changeJobTask} 
               changeJobFrom={changeJobFrom} 
-              changeJobTo={changeJobTo}
+              changeJobTo={changeJobTo} 
             />
+
+            {newExp.map((element, index) => <Experience key={index}/>)}
+
+            <div className="entry"> 
+            <button onClick={handleAddEntry}>Add Entry</button>
+            </div>
+            
             <Education changeSchool={changeSchool} changeSchoolAdd={changeSchoolAdd} 
             changeDegree={changeDegree} changeSchoolFrom={changeSchoolFrom} changeSchoolTo={changeSchoolTo}/>
             <Helper/>
+
           </div>
           <div className="output">
             <Output fullName={firstName + " " + lastName}
               address={address} role={role} email={email} phone={phone} user_avatar={user_avatar}
               company={company} comp_address={comp_address} position={position} jobTask={jobTask} jobFrom={jobFrom} jobTo={jobTo}
               school={school} school_address={school_address} degree={degree} schoolFrom={schoolFrom} schoolTo={schoolTo}
+              newExp={newExp}
             />
           </div>
         </div>
