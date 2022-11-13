@@ -3,9 +3,11 @@ import OutputExperience from './out-exp'
 const Output = (props) => {
 
     const {fullName, address, role, email, phone, user_avatar} = props;
-    const {company, comp_address, position, jobTask, jobFrom, jobTo} = props;
+    const {companys, company, comp_address, position, jobTask, jobFrom, jobTo} = props;
     const {school, school_address, degree, schoolFrom, schoolTo} = props;
     const {newExp} = props;
+
+    // console.log(props);
     return ( 
         <div className="output-wrapper">
             <div className="head">
@@ -17,7 +19,8 @@ const Output = (props) => {
                     <div className="experience">
                         <h4 className="title">Experience</h4>        
                         <OutputExperience 
-                        company={company} 
+                        companys={companys} 
+                        company={company}
                         comp_address={comp_address}
                         position={position}
                         jobTask={jobTask}
@@ -25,15 +28,17 @@ const Output = (props) => {
                         jobTo={jobTo}
                         />
                         
-                        {newExp && 
+                        {newExp.map((element, index) => 
                         <OutputExperience 
-                        company={company} 
+                        key={index}
+                        companys={companys} 
+                        company={company}
                         comp_address={comp_address}
                         position={position}
                         jobTask={jobTask}
                         jobFrom={jobFrom}
                         jobTo={jobTo}
-                        />}
+                        />)}
 
 
                     </div>

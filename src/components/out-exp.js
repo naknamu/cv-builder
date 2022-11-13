@@ -6,7 +6,7 @@ const OutputExperience = (props) => {
             <h4>{jobFrom} - {jobTo}</h4>
             <div>
                 <h4>{position}</h4>
-                <div className="company">{company} - {comp_address}</div>
+                <div className="company">{company.text} - {comp_address}</div>
                 <div>{jobTask}</div>
             </div>
         </div>

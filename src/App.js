@@ -5,8 +5,7 @@ import Header from "./components/header";
 import Helper from "./components/helper";
 import Output from "./components/output";
 import React, { Component } from "react";
-import avatar from "../src/image/empty_avatar.png"
-import uniqid from "uniqid";
+import avatar from "../src/image/empty_avatar.png";
 
 class App extends Component {
   constructor() {
@@ -37,6 +36,7 @@ class App extends Component {
     this.handleAddEntry = this.handleAddEntry.bind(this);
  
     this.state = {
+
       firstName: '',
       lastName: '',
       address: '',
@@ -45,14 +45,17 @@ class App extends Component {
       phone: '',
       user_avatar: avatar,
 
-      company: '',
+      exp_counter: 0,
+      companys: [],
+      company: {
+        text: ''
+      },
       comp_address: '',
       position: '',
       jobTask: '',
       jobFrom: '',
       jobTo: '',
       newExp: [],
-      id: uniqid(),
 
       school: '',
       school_address: '',
@@ -118,8 +121,14 @@ class App extends Component {
 
   /*EXPERIENCE*/
   changeCompany = (e) => {
+    let companys = [...this.state.companys];
+    companys[e.target.id] = e.target.value;
+
     this.setState({
-      company : e.target.value
+      company : {
+        text: e.target.value
+      },
+      companys
     })
   }
 
@@ -185,10 +194,8 @@ class App extends Component {
   }
   /*ENTRY*/
   handleAddEntry = () => {
-    console.log('new exp:' + this.state.newExp);
      this.setState({
-       newExp: this.state.newExp.concat([this.state.id]),
-       id: uniqid()
+       newExp: this.state.newExp.concat([this.state.id])
      })
   }
 
@@ -199,7 +206,7 @@ class App extends Component {
     const {firstName, lastName, address, role, email, phone, user_avatar} = this.state;
     //practical exp
     const {changeCompany, changeCompAddress, changePosition, changeJobTask, changeJobFrom, changeJobTo} = this;
-    const {company, comp_address, position, jobTask, jobFrom, jobTo, newExp} = this.state;
+    const {companys, company, comp_address, position, jobTask, jobFrom, jobTo, newExp} = this.state;
     const {handleAddEntry} = this;
     //educational
     const {changeSchool, changeSchoolAdd, changeDegree, changeSchoolFrom, changeSchoolTo} = this;
@@ -215,13 +222,18 @@ class App extends Component {
               changeAddress={changeAddress} changeRole={changeRole} changeEmail={changeEmail}
               changePhone={changePhone} uploadPhoto={uploadPhoto} getImage={getImage}/>
             
-            <Experience changeCompany={changeCompany} changeCompAddress={changeCompAddress} 
+            <Experience exp_counter={0} changeCompany={changeCompany} changeCompAddress={changeCompAddress} 
               changePosition={changePosition} changeJobTask={changeJobTask} 
               changeJobFrom={changeJobFrom} 
-              changeJobTo={changeJobTo} 
+              changeJobTo={changeJobTo}
             />
 
-            {newExp.map((element, index) => <Experience key={index}/>)}
+            {newExp.map((element, index) => 
+              <Experience exp_counter={index+1} key={index} changeCompany={changeCompany} changeCompAddress={changeCompAddress} 
+                changePosition={changePosition} changeJobTask={changeJobTask} 
+                changeJobFrom={changeJobFrom} 
+                changeJobTo={changeJobTo} 
+              />)}
 
             <div className="entry"> 
             <button onClick={handleAddEntry}>Add Entry</button>
@@ -235,7 +247,7 @@ class App extends Component {
           <div className="output">
             <Output fullName={firstName + " " + lastName}
               address={address} role={role} email={email} phone={phone} user_avatar={user_avatar}
-              company={company} comp_address={comp_address} position={position} jobTask={jobTask} jobFrom={jobFrom} jobTo={jobTo}
+              companys={companys} company={company} comp_address={comp_address} position={position} jobTask={jobTask} jobFrom={jobFrom} jobTo={jobTo}
               school={school} school_address={school_address} degree={degree} schoolFrom={schoolFrom} schoolTo={schoolTo}
               newExp={newExp}
             />
