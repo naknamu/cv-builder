@@ -6,6 +6,7 @@ import Helper from "./components/helper";
 import Output from "./components/output";
 import React, { Component } from "react";
 import avatar from "../src/image/empty_avatar.png";
+import uniqid from "uniqid";
 
 class App extends Component {
   constructor() {
@@ -34,6 +35,7 @@ class App extends Component {
     this.changeSchoolTo = this.changeSchoolTo.bind(this);
     //
     this.handleAddEntry = this.handleAddEntry.bind(this);
+    this.handleDeleteEntry = this.handleDeleteEntry.bind(this);
  
     this.state = {
 
@@ -45,17 +47,21 @@ class App extends Component {
       phone: '',
       user_avatar: avatar,
 
-      exp_counter: 0,
       companys: [],
       company: {
         text: ''
       },
-      comp_address: '',
+      comps_address: [],
+      comp_address: {
+        text: ''
+      },
       position: '',
       jobTask: '',
       jobFrom: '',
       jobTo: '',
       newExp: [],
+      id: uniqid(),
+      exp_counter: 0,
 
       school: '',
       school_address: '',
@@ -120,21 +126,29 @@ class App extends Component {
   }
 
   /*EXPERIENCE*/
-  changeCompany = (e) => {
-    let companys = [...this.state.companys];
-    companys[e.target.id] = e.target.value;
-
+  changeCompany = (e, index) => {
+    let newCompanys = [...this.state.companys];
+    newCompanys[index] = e.target.value;
+    console.log(e);
+    console.log(index);
+    
     this.setState({
       company : {
         text: e.target.value
       },
-      companys
+      companys: newCompanys
     })
   }
 
   changeCompAddress = (e) => {
+    let comps_address = [...this.state.comps_address];
+    comps_address[e.target.className] = e.target.value;
+
     this.setState({
-      comp_address: e.target.value
+      comp_address: {
+        text: e.target.value
+      },
+      comps_address
     })
   }
 
@@ -195,8 +209,49 @@ class App extends Component {
   /*ENTRY*/
   handleAddEntry = () => {
      this.setState({
-       newExp: this.state.newExp.concat([this.state.id])
+       id: uniqid(),
+       newExp: this.state.newExp.concat(
+       <Experience key={this.state.id} changeCompany={this.changeCompany} changeCompAddress={this.changeCompAddress} 
+        changePosition={this.changePosition} changeJobTask={this.changeJobTask} 
+        changeJobFrom={this.changeJobFrom} 
+        changeJobTo={this.changeJobTo} 
+        handleDeleteEntry={this.handleDeleteEntry}/>)
      })
+     
+  }
+
+  handleDeleteEntry = (e, index) => {
+    // console.log(index);
+    let newCompanys = [...this.state.companys];
+    newCompanys.splice(index, 1);
+
+    this.setState({
+      id: uniqid(),
+      newExp : this.state.newExp.filter((newExp) => newExp !== e),
+      companys: newCompanys
+    })
+  }
+
+
+  componentDidMount() {
+    this.initialRender = () => {
+      this.setState({
+        id: uniqid(),
+        newExp: this.state.newExp.concat(
+          <Experience key={this.state.id} changeCompany={this.changeCompany} changeCompAddress={this.changeCompAddress} 
+           changePosition={this.changePosition} changeJobTask={this.changeJobTask} 
+           changeJobFrom={this.changeJobFrom} 
+           changeJobTo={this.changeJobTo} 
+           handleDeleteEntry={this.handleDeleteEntry}/>)
+      })
+    }
+
+    this.initialRender();
+    // console.log('new exp initialized!');
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.initialRender);
   }
 
   render() {
@@ -205,13 +260,13 @@ class App extends Component {
       changePhone, uploadPhoto, getImage} = this;
     const {firstName, lastName, address, role, email, phone, user_avatar} = this.state;
     //practical exp
-    const {changeCompany, changeCompAddress, changePosition, changeJobTask, changeJobFrom, changeJobTo} = this;
-    const {companys, company, comp_address, position, jobTask, jobFrom, jobTo, newExp} = this.state;
+    // const {changeCompany, changeCompAddress, changePosition, changeJobTask, changeJobFrom, changeJobTo} = this;
+    const {companys, comps_address, position, jobTask, jobFrom, jobTo, newExp, exp_counter} = this.state;
     const {handleAddEntry} = this;
     //educational
     const {changeSchool, changeSchoolAdd, changeDegree, changeSchoolFrom, changeSchoolTo} = this;
     const {school, school_address, degree, schoolFrom, schoolTo} = this.state;
-
+    //
     return (
       <div className="App">
         <Header/>
@@ -221,19 +276,13 @@ class App extends Component {
             <General changeFirstName={changeFirstName} changeLastName={changeLastName}
               changeAddress={changeAddress} changeRole={changeRole} changeEmail={changeEmail}
               changePhone={changePhone} uploadPhoto={uploadPhoto} getImage={getImage}/>
-            
-            <Experience exp_counter={0} changeCompany={changeCompany} changeCompAddress={changeCompAddress} 
-              changePosition={changePosition} changeJobTask={changeJobTask} 
-              changeJobFrom={changeJobFrom} 
-              changeJobTo={changeJobTo}
-            />
 
-            {newExp.map((element, index) => 
-              <Experience exp_counter={index+1} key={index} changeCompany={changeCompany} changeCompAddress={changeCompAddress} 
-                changePosition={changePosition} changeJobTask={changeJobTask} 
-                changeJobFrom={changeJobFrom} 
-                changeJobTo={changeJobTo} 
-              />)}
+            {newExp.map((newExp, index) => 
+              <Experience index={index} key={newExp.key} changeCompany={this.changeCompany} changeCompAddress={this.changeCompAddress} 
+              changePosition={this.changePosition} changeJobTask={this.changeJobTask} 
+              changeJobFrom={this.changeJobFrom} 
+              changeJobTo={this.changeJobTo} 
+              handleDeleteEntry={() => this.handleDeleteEntry(newExp, index)}/>)}
 
             <div className="entry"> 
             <button onClick={handleAddEntry}>Add Entry</button>
@@ -247,9 +296,9 @@ class App extends Component {
           <div className="output">
             <Output fullName={firstName + " " + lastName}
               address={address} role={role} email={email} phone={phone} user_avatar={user_avatar}
-              companys={companys} company={company} comp_address={comp_address} position={position} jobTask={jobTask} jobFrom={jobFrom} jobTo={jobTo}
+              companys={companys} comps_address={comps_address} position={position} jobTask={jobTask} jobFrom={jobFrom} jobTo={jobTo}
               school={school} school_address={school_address} degree={degree} schoolFrom={schoolFrom} schoolTo={schoolTo}
-              newExp={newExp}
+              newExp={newExp} exp_counter={exp_counter}
             />
           </div>
         </div>
