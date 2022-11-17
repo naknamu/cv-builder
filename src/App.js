@@ -329,7 +329,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <div className="content">
-          <div className="input">
+          <div className="inputColumn">
             <General
               changeFirstName={changeFirstName}
               changeLastName={changeLastName}
@@ -341,57 +341,72 @@ class App extends Component {
               getImage={getImage}
             />
 
+          <div className="exp-container">
+            <h3>Experience</h3>
+
             {newExp.map((newExp, index) => (
-              <Experience
-                index={index}
-                key={newExp.key}
-                changeCompany={changeCompany}
-                changeCompAddress={changeCompAddress}
-                changePosition={changePosition}
-                changeJobTask={changeJobTask}
-                changeJobFrom={changeJobFrom}
-                changeJobTo={changeJobTo}
-                handleDeleteExp={() => handleDeleteExp(newExp, index)}
-              />
-            ))}
+                <Experience
+                  index={index}
+                  key={newExp.key}
+                  changeCompany={changeCompany}
+                  changeCompAddress={changeCompAddress}
+                  changePosition={changePosition}
+                  changeJobTask={changeJobTask}
+                  changeJobFrom={changeJobFrom}
+                  changeJobTo={changeJobTo}
+                  handleDeleteExp={() => handleDeleteExp(newExp, index)}
+                  handleAddExp={handleAddExp}
+                />
+              ))}
 
-            <div className="entry">
-              <button onClick={handleAddExp}>Add Entry</button>
-            </div>
+              <div className="entry">
+                <button onClick={handleAddExp}>Add Experience</button>
+              </div>
+          </div>
 
+
+          <div className="educ-container">
             <Education
-              changeSchool={changeSchool}
-              changeSchoolAdd={changeSchoolAdd}
-              changeDegree={changeDegree}
-              changeSchoolFrom={changeSchoolFrom}
-              changeSchoolTo={changeSchoolTo}
-            />
+                changeSchool={changeSchool}
+                changeSchoolAdd={changeSchoolAdd}
+                changeDegree={changeDegree}
+                changeSchoolFrom={changeSchoolFrom}
+                changeSchoolTo={changeSchoolTo}
+              />
+
+              <div className="entry">
+                <button>Add Education</button>
+              </div>
+          </div>
+
+
             <Helper />
-          </div>
-          <div className="output">
-            <Output
-              fullName={firstName + " " + lastName}
-              address={address}
-              role={role}
-              email={email}
-              phone={phone}
-              user_avatar={user_avatar}
 
-              companys={companys}
-              comps_address={comps_address}
-              positions={positions}
-              jobTasks={jobTasks}
-              jobsFrom={jobsFrom}
-              jobsTo={jobsTo}
-              newExp={newExp}
-
-              school={school}
-              school_address={school_address}
-              degree={degree}
-              schoolFrom={schoolFrom}
-              schoolTo={schoolTo}
-            />
           </div>
+          
+          <Output
+            fullName={firstName + " " + lastName}
+            address={address}
+            role={role}
+            email={email}
+            phone={phone}
+            user_avatar={user_avatar}
+
+            companys={companys}
+            comps_address={comps_address}
+            positions={positions}
+            jobTasks={jobTasks}
+            jobsFrom={jobsFrom}
+            jobsTo={jobsTo}
+            newExp={newExp}
+
+            school={school}
+            school_address={school_address}
+            degree={degree}
+            schoolFrom={schoolFrom}
+            schoolTo={schoolTo}
+          />
+          
         </div>
       </div>
     );

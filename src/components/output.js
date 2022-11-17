@@ -30,8 +30,6 @@ const Output = (props) => {
                         jobsFrom={jobsFrom}
                         jobsTo={jobsTo}
                         />)}
-
-
                     </div>
                     <div className="education">
                         <h4 className="title">Education</h4>

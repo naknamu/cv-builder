@@ -10,50 +10,71 @@
 :root{
     --formColor: #dadada;
     --head: #15803d;
+    --headHover: #0e5327;
 }
 
-/* @media only screen and (min-width: 600px) {
-    html, body {
-        background-color: black;
-        height: 100%;
-      }
-    
-      html{
-        display: flex;
-        justify-content: center;
-      }
-    
-      body{
-        width: 50%;
-      }
-} */
+body{
+    background-color: #585858;
+}
 
 .header{
     background-color: black;
     color: white;
-    padding: 20px;
+    padding: 20px 40px;
     display: flex;
-    /* place-content: center; */
     gap: 10px;
-    font-size: 42px;
+    font-size: 20px;
     font-weight: bold;
+    box-shadow: 0 3px 10px 0 rgb(0 0 0 / 40%);
 }
 
 .content{
-    padding: 20px;
-    background-color: #404040;
+    padding: 3rem;
     display: flex;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    max-width: 80%;
+    margin: 0 auto;
+    align-items: flex-start;
 }
 
-.general, .educ, .exp{
+.inputColumn{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.general{
     background-color: var(--formColor);
     color: black;
-    margin: 10px;
     padding: 20px;
     border-radius: 8px;
     display: flex;
     gap: 12px;
     flex-direction: column;
+}
+
+.exp-container, .educ-container{
+    background-color: var(--formColor);
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+}
+
+.exp, .educ{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.helper{
+    background-color: var(--formColor);
+    border-radius: 4px;
+    display: flex;
+    padding: 10px;
+    gap: 10px;
 }
 
 input{
@@ -70,14 +91,15 @@ button{
     padding: 8px;
     border-radius: 4px;
     border: none;
-    width: 30%;
+    width: 50%;
     font-weight: bold;
-    background-color: rgb(30, 30, 30);
+    background-color: var(--head);
     color: white;
 }
 
 button:hover{
-    background-color: rgb(10, 10, 10);
+    background-color: var(--headHover);
+    transition: 0.3s ease-in-out;
 }
 
 form{
@@ -89,6 +111,10 @@ form{
 .entry{
     display: flex;
     justify-content: center;
+}
+
+.delete button:hover{
+    background-color: rgb(182, 8, 8);
 }
 
 .date{
@@ -103,22 +129,18 @@ textarea{
     outline: none;
 }
 
-.output{
-    background-color: white;
-    width: 100%;
-    margin: 10px;
-}
-
 .output-wrapper{
-    height: 100%;
     box-shadow: 0 5px 15px rgb(0 0 0 / 35%);
+    display: grid;
+    grid-template-rows: 1fr 10fr;
+    position: sticky;
+    top: 20px;
 }
 
 .head{
     background-color: var(--head);
-    padding: 20px 0px 0px 30px;
+    padding: 20px 0px 20px 30px;
     color: white;
-    height: 10%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -127,7 +149,6 @@ textarea{
 .maincontent{
     display: grid;
     grid-template-columns: 3fr 1fr;
-    height: 90%;
 }
 
 .maincontent .title{
@@ -180,7 +201,7 @@ textarea{
     gap: 10px;
 }
 
-.output img{
+.second-column img{
     width: 100%;
     box-shadow: 0 5px 15px rgb(0 0 0 / 35%);
     margin-bottom: 20px;

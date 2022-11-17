@@ -1,4 +1,4 @@
-import AddEntry from "./add-entry";
+
 
 const Education = (props) => {
 
@@ -14,7 +14,9 @@ const Education = (props) => {
             <input type="text" name="dateFrom" placeholder="From" onChange={changeSchoolFrom}/>
             <input type="text" name="dateTo" placeholder="To" onChange={changeSchoolTo}/>
             </div>
-            <AddEntry/>
+            <div className="delete entry">
+                <button>Delete</button>
+            </div>
         </div>
      );
 }
