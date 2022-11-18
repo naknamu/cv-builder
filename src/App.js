@@ -8,6 +8,8 @@ import React, { Component } from "react";
 import avatar from "../src/image/empty_avatar.png";
 import uniqid from "uniqid";
 
+import ReactToPrint from "react-to-print";
+
 class App extends Component {
   constructor() {
     super();
@@ -36,6 +38,10 @@ class App extends Component {
     //
     this.handleAddExp = this.handleAddExp.bind(this);
     this.handleDeleteExp = this.handleDeleteExp.bind(this);
+    //
+    this.handleAddEduc = this.handleAddEduc.bind(this);
+    this.handleDeleteEduc = this.handleDeleteEduc.bind(this);
+    //
 
     this.state = {
       firstName: "",
@@ -47,9 +53,9 @@ class App extends Component {
       user_avatar: avatar,
 
       companys: [],
-      company: '',
+      company: "",
       comps_address: [],
-      comp_address: '',
+      comp_address: "",
       positions: [],
       position: "",
       jobTasks: [],
@@ -60,13 +66,18 @@ class App extends Component {
       jobTo: "",
       newExp: [],
       id: uniqid(),
-      exp_counter: 0,
 
+      schools: [],
       school: "",
+      schools_address: [],
       school_address: "",
+      degrees: [],
       degree: "",
+      schoolsFrom: [],
       schoolFrom: "",
+      schoolsTo: [],
       schoolTo: "",
+      newEduc: [],
     };
   }
 
@@ -181,33 +192,48 @@ class App extends Component {
   };
 
   /*EDUCATION*/
-  changeSchool = (e) => {
+  changeSchool = (e, index) => {
+    let newSchools = [...this.state.schools];
+    newSchools[index] = e.target.value;
     this.setState({
       school: e.target.value,
+      schools: newSchools,
     });
   };
 
-  changeSchoolAdd = (e) => {
+  changeSchoolAdd = (e, index) => {
+    let newSchools_address = [...this.state.schools_address];
+    newSchools_address[index] = e.target.value;
     this.setState({
       school_address: e.target.value,
+      schools_address: newSchools_address,
     });
   };
 
-  changeDegree = (e) => {
+  changeDegree = (e, index) => {
+    let newDegrees = [...this.state.degrees];
+    newDegrees[index] = e.target.value;
     this.setState({
       degree: e.target.value,
+      degrees: newDegrees,
     });
   };
 
-  changeSchoolFrom = (e) => {
+  changeSchoolFrom = (e, index) => {
+    let newSchools_from = [...this.state.schoolsFrom];
+    newSchools_from[index] = e.target.value;
     this.setState({
       schoolFrom: e.target.value,
+      schoolsFrom: newSchools_from,
     });
   };
 
-  changeSchoolTo = (e) => {
+  changeSchoolTo = (e, index) => {
+    let newSchools_to = [...this.state.schoolsTo];
+    newSchools_to[index] = e.target.value;
     this.setState({
       schoolTo: e.target.value,
+      schoolsTo: newSchools_to,
     });
   };
   /*ENTRY*/
@@ -224,6 +250,22 @@ class App extends Component {
           changeJobFrom={this.changeJobFrom}
           changeJobTo={this.changeJobTo}
           handleDeleteEntry={this.handleDeleteEntry}
+        />
+      ),
+    });
+  };
+
+  handleAddEduc = () => {
+    this.setState({
+      id: uniqid(),
+      newEduc: this.state.newEduc.concat(
+        <Education
+          key={this.state.id}
+          changeSchool={this.changeSchool}
+          changeSchoolAdd={this.changeSchoolAdd}
+          changeDegree={this.changeDegree}
+          changeSchoolFrom={this.changeSchoolFrom}
+          changeSchoolTo={this.changeSchoolTo}
         />
       ),
     });
@@ -252,7 +294,31 @@ class App extends Component {
       positions: newPositions,
       jobTasks: newJobTasks,
       jobsFrom: newJobsFrom,
-      jobsTo: newJobsTo
+      jobsTo: newJobsTo,
+    });
+  };
+
+  handleDeleteEduc = (e, index) => {
+    let newSchools = [...this.state.schools];
+    let newSchools_address = [...this.state.schools_address];
+    let newDegrees = [...this.state.degrees];
+    let newSchools_from = [...this.state.schoolsFrom];
+    let newSchools_to = [...this.state.schoolsTo];
+
+    newSchools.splice(index, 1);
+    newSchools_address.splice(index, 1);
+    newDegrees.splice(index, 1);
+    newSchools_from.splice(index, 1);
+    newSchools_to.splice(index, 1);
+
+    this.setState({
+      id: uniqid(),
+      newEduc: this.state.newEduc.filter((newEduc) => newEduc !== e),
+      schools: newSchools,
+      schools_address: newSchools_address,
+      degrees: newDegrees,
+      schoolsFrom: newSchools_from,
+      schoolsTo: newSchools_to,
     });
   };
 
@@ -270,6 +336,16 @@ class App extends Component {
             changeJobFrom={this.changeJobFrom}
             changeJobTo={this.changeJobTo}
             handleDeleteExp={this.handleDeleteExp}
+          />
+        ),
+        newEduc: this.state.newEduc.concat(
+          <Education
+            key={this.state.id}
+            changeSchool={this.changeSchool}
+            changeSchoolAdd={this.changeSchoolAdd}
+            changeDegree={this.changeDegree}
+            changeSchoolFrom={this.changeSchoolFrom}
+            changeSchoolTo={this.changeSchoolTo}
           />
         ),
       });
@@ -312,7 +388,7 @@ class App extends Component {
       jobTasks,
       jobsFrom,
       jobsTo,
-      newExp
+      newExp,
     } = this.state;
     const { handleAddExp, handleDeleteExp } = this;
     //educational
@@ -323,7 +399,15 @@ class App extends Component {
       changeSchoolFrom,
       changeSchoolTo,
     } = this;
-    const { school, school_address, degree, schoolFrom, schoolTo } = this.state;
+    const {
+      schools,
+      schools_address,
+      degrees,
+      schoolsFrom,
+      schoolsTo,
+      newEduc,
+    } = this.state;
+    const { handleAddEduc, handleDeleteEduc } = this;
     //
     return (
       <div className="App">
@@ -341,10 +425,10 @@ class App extends Component {
               getImage={getImage}
             />
 
-          <div className="exp-container">
-            <h3>Experience</h3>
+            <div className="exp-container">
+              <h3>Experience</h3>
 
-            {newExp.map((newExp, index) => (
+              {newExp.map((newExp, index) => (
                 <Experience
                   index={index}
                   key={newExp.key}
@@ -355,43 +439,52 @@ class App extends Component {
                   changeJobFrom={changeJobFrom}
                   changeJobTo={changeJobTo}
                   handleDeleteExp={() => handleDeleteExp(newExp, index)}
-                  handleAddExp={handleAddExp}
+                  // handleAddExp={handleAddExp}
                 />
               ))}
 
               <div className="entry">
                 <button onClick={handleAddExp}>Add Experience</button>
               </div>
-          </div>
+            </div>
 
+            <div className="educ-container">
+              <h3>Education</h3>
 
-          <div className="educ-container">
-            <Education
-                changeSchool={changeSchool}
-                changeSchoolAdd={changeSchoolAdd}
-                changeDegree={changeDegree}
-                changeSchoolFrom={changeSchoolFrom}
-                changeSchoolTo={changeSchoolTo}
-              />
+              {newEduc.map((newEduc, index) => (
+                <Education
+                  index={index}
+                  key={newEduc.key}
+                  changeSchool={changeSchool}
+                  changeSchoolAdd={changeSchoolAdd}
+                  changeDegree={changeDegree}
+                  changeSchoolFrom={changeSchoolFrom}
+                  changeSchoolTo={changeSchoolTo}
+                  handleDeleteEduc={() => handleDeleteEduc(newEduc, index)}
+                />
+              ))}
 
               <div className="entry">
-                <button>Add Education</button>
+                <button onClick={handleAddEduc}>Add Education</button>
               </div>
+            </div>
+
+            <ReactToPrint
+              trigger={() => {
+                return <Helper />;
+              }}
+              content={() => this.componentRef}
+            />
           </div>
 
-
-            <Helper />
-
-          </div>
-          
           <Output
+            ref={(el) => (this.componentRef = el)}
             fullName={firstName + " " + lastName}
             address={address}
             role={role}
             email={email}
             phone={phone}
             user_avatar={user_avatar}
-
             companys={companys}
             comps_address={comps_address}
             positions={positions}
@@ -399,14 +492,13 @@ class App extends Component {
             jobsFrom={jobsFrom}
             jobsTo={jobsTo}
             newExp={newExp}
-
-            school={school}
-            school_address={school_address}
-            degree={degree}
-            schoolFrom={schoolFrom}
-            schoolTo={schoolTo}
+            schools={schools}
+            schools_address={schools_address}
+            degrees={degrees}
+            schoolsFrom={schoolsFrom}
+            schoolsTo={schoolsTo}
+            newEduc={newEduc}
           />
-          
         </div>
       </div>
     );

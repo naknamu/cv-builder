@@ -1,7 +1,8 @@
-const Helper = () => {
+const Helper = (props) => {
+
     return ( 
         <div className="helper">
-            <button>Download as PDF</button>
+            <button onClick={props.onClick}>Print/Save PDF</button>
             <button type="submit">Example</button>
             <button type="reset">Reset</button>
         </div>
