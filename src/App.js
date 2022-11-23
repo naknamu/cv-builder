@@ -7,8 +7,8 @@ import Output from "./components/output";
 import React, { Component } from "react";
 import avatar from "../src/image/empty_avatar.png";
 import uniqid from "uniqid";
-
 import ReactToPrint from "react-to-print";
+import sampleAvatar from "../src/image/avatar_meme.png"
 
 class App extends Component {
   constructor() {
@@ -42,6 +42,7 @@ class App extends Component {
     this.handleAddEduc = this.handleAddEduc.bind(this);
     this.handleDeleteEduc = this.handleDeleteEduc.bind(this);
     //
+    this.handleExampleOutput = this.handleExampleOutput.bind(this);
 
     this.state = {
       firstName: "",
@@ -51,6 +52,14 @@ class App extends Component {
       email: "",
       phone: "",
       user_avatar: avatar,
+
+      firstNameValue: '',
+      lastNameValue: '',
+      addressValue: '',
+      roleValue: '',
+      emailValue: '',
+      phoneValue: '',
+      user_avatarValue: '',
 
       companys: [],
       company: "",
@@ -67,6 +76,13 @@ class App extends Component {
       newExp: [],
       id: uniqid(),
 
+      companysValue: [],
+      comps_addressValue: [],
+      positionsValue: [],
+      jobTasksValue: [],
+      jobsFromValue: [],
+      jobsToValue: [],
+
       schools: [],
       school: "",
       schools_address: [],
@@ -78,6 +94,12 @@ class App extends Component {
       schoolsTo: [],
       schoolTo: "",
       newEduc: [],
+
+      schoolsValue: [],
+      schools_addressValue: [],
+      degreesValue: [],
+      schoolsFromValue: [],
+      schoolsToValue: [],
     };
   }
 
@@ -322,6 +344,73 @@ class App extends Component {
     });
   };
 
+  handleExampleOutput = (e) => {
+    let ex_firstName = "John";
+    let ex_lastName = "Doe";
+    let ex_address = "123 Fake Street, Ph";
+    let ex_role = "Web Developer";
+    let ex_email = "notafake@email.com";
+    let ex_phone = "8888-888";
+    let ex_user_avatar = sampleAvatar;
+
+    let ex_companys = ["Example Company", "TEST"];
+    let ex_comps_address = ["Anywhere Street, Nowhere City, Philippines"];
+    let ex_positions = ["Web Developer"];
+    let ex_jobTasks = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."];
+    let ex_jobsFrom = ["2018"];
+    let ex_jobsTo = ["Current"];
+
+    let ex_schools = ["Great University"];
+    let ex_schools_address = ["Fake Street, Everywhere City"];
+    let ex_degrees = ["Computer Science"];
+    let ex_schoolsFrom = ["2015"];
+    let ex_schoolsTo = ["2016"];
+
+    this.setState({
+      firstName: ex_firstName,
+      lastName: ex_lastName,
+      address: ex_address,
+      role: ex_role,
+      email: ex_email,
+      phone: ex_phone,
+      user_avatar: ex_user_avatar,
+
+      firstNameValue: ex_firstName,
+      lastNameValue: ex_lastName,
+      addressValue: ex_address,
+      roleValue: ex_role,
+      emailValue: ex_email,
+      phoneValue: ex_phone,
+      user_avatarValue: ex_user_avatar,
+
+      companys: ex_companys,
+      comps_address: ex_comps_address,
+      positions: ex_positions,
+      jobTasks: ex_jobTasks,
+      jobsFrom: ex_jobsFrom,
+      jobsTo: ex_jobsTo,
+
+      companysValue: ex_companys,
+      comps_addressValue: ex_comps_address,
+      positionsValue: ex_positions,
+      jobTasksValue: ex_jobTasks,
+      jobsFromValue: ex_jobsFrom,
+      jobsToValue: ex_jobsTo,
+
+      schools: ex_schools,
+      schools_address: ex_schools_address,
+      degrees: ex_degrees,
+      schoolsFrom: ex_schoolsFrom,
+      schoolsTo: ex_schoolsTo,
+
+      schoolsValue: ex_schools,
+      schools_addressValue: ex_schools_address,
+      degreesValue: ex_degrees,
+      schoolsFromValue: ex_schoolsFrom,
+      schoolsToValue: ex_schoolsTo,
+    });
+  }
+
   componentDidMount() {
     this.initialRender = () => {
       this.setState({
@@ -372,6 +461,7 @@ class App extends Component {
     } = this;
     const { firstName, lastName, address, role, email, phone, user_avatar } =
       this.state;
+    const {firstNameValue, lastNameValue, addressValue, roleValue, emailValue, phoneValue, user_avatarValue} = this.state;
     //practical exp
     const {
       changeCompany,
@@ -390,6 +480,12 @@ class App extends Component {
       jobsTo,
       newExp,
     } = this.state;
+    const {companysValue,
+      comps_addressValue,
+      positionsValue,
+      jobTasksValue,
+      jobsFromValue,
+      jobsToValue} = this.state;
     const { handleAddExp, handleDeleteExp } = this;
     //educational
     const {
@@ -407,7 +503,13 @@ class App extends Component {
       schoolsTo,
       newEduc,
     } = this.state;
+    const {schoolsValue,
+    schools_addressValue,
+    degreesValue,
+    schoolsFromValue,
+    schoolsToValue} = this.state;
     const { handleAddEduc, handleDeleteEduc } = this;
+    const {handleExampleOutput} = this;
     //
     return (
       <div className="App">
@@ -423,6 +525,14 @@ class App extends Component {
               changePhone={changePhone}
               uploadPhoto={uploadPhoto}
               getImage={getImage}
+
+              firstName={firstNameValue}
+              lastName={lastNameValue}
+              address={addressValue}
+              role={roleValue}
+              email={emailValue}
+              phone={phoneValue}
+              avatar={user_avatarValue}
             />
 
             <div className="exp-container">
@@ -439,7 +549,13 @@ class App extends Component {
                   changeJobFrom={changeJobFrom}
                   changeJobTo={changeJobTo}
                   handleDeleteExp={() => handleDeleteExp(newExp, index)}
-                  // handleAddExp={handleAddExp}
+                  
+                  companys={companysValue}
+                  comps_address={comps_addressValue}
+                  positions={positionsValue}
+                  jobTasks={jobTasksValue}
+                  jobsFrom={jobsFromValue}
+                  jobsTo={jobsToValue}
                 />
               ))}
 
@@ -461,6 +577,12 @@ class App extends Component {
                   changeSchoolFrom={changeSchoolFrom}
                   changeSchoolTo={changeSchoolTo}
                   handleDeleteEduc={() => handleDeleteEduc(newEduc, index)}
+
+                  schools={schoolsValue}
+                  schools_address={schools_addressValue}
+                  degrees={degreesValue}
+                  schoolsFrom={schoolsFromValue}
+                  schoolsTo={schoolsToValue}
                 />
               ))}
 
@@ -471,7 +593,7 @@ class App extends Component {
 
             <ReactToPrint
               trigger={() => {
-                return <Helper />;
+                return <Helper handleExampleOutput={handleExampleOutput} />;
               }}
               content={() => this.componentRef}
             />
