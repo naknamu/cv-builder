@@ -159,6 +159,10 @@ textarea{
     color: var(--head);
 }
 
+.maincontent>div{
+    font-size: 14px;
+}
+
 .first-column{
     padding: 30px;
     display: flex;
@@ -203,4 +207,8 @@ textarea{
     width: 100%;
     box-shadow: 0 5px 15px rgb(0 0 0 / 35%);
     margin-bottom: 20px;
+}
+
+.red:hover{
+    background-color: rgb(182, 8, 8);
 }
