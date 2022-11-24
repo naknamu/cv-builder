@@ -9,6 +9,7 @@ import avatar from "../src/image/empty_avatar.png";
 import uniqid from "uniqid";
 import ReactToPrint from "react-to-print";
 import sampleAvatar from "../src/image/avatar_meme.png";
+import emptyAvatar from "../src/image/empty_avatar.png";
 
 class App extends Component {
   constructor() {
@@ -43,6 +44,7 @@ class App extends Component {
     this.handleDeleteEduc = this.handleDeleteEduc.bind(this);
     //
     this.handleExampleOutput = this.handleExampleOutput.bind(this);
+    this.handleResetOutput = this.handleResetOutput.bind(this);
 
     this.state = {
       firstName: "",
@@ -442,6 +444,74 @@ class App extends Component {
     });
   };
 
+  handleResetOutput = () => {
+    //empty the array
+    let resetExp = [];
+    let resetEduc = [];
+    //assign a single item
+    resetExp.push(
+      <Experience
+        key={uniqid()}
+      />
+    )
+    resetEduc.push(
+      <Education
+        key={uniqid()}
+      />
+    )
+
+    this.setState({
+      exampleFlag: false,
+      id: uniqid(),
+
+      firstName: '',
+      lastName: '',
+      address: '',
+      role: '',
+      email: '',
+      phone: '',
+      user_avatar: emptyAvatar,
+
+      firstNameValue: '',
+      lastNameValue: '',
+      addressValue: '',
+      roleValue: '',
+      emailValue: '',
+      phoneValue: '',
+      user_avatarValue: '',
+
+      companys: [],
+      comps_address: [],
+      positions: [],
+      jobTasks: [],
+      jobsFrom: [],
+      jobsTo: [],
+
+      companysValue: [],
+      comps_addressValue: [],
+      positionsValue: [],
+      jobTasksValue: [],
+      jobsFromValue: [],
+      jobsToValue: [],
+
+      newExp: resetExp,
+
+      schools: [],
+      schools_address: [],
+      degrees: [],
+      schoolsFrom: [],
+      schoolsTo: [],
+
+      schoolsValue: [],
+      schools_addressValue: [],
+      degreesValue: [],
+      schoolsFromValue: [],
+      schoolsToValue: [],
+
+      newEduc: resetEduc
+    });
+  }
+
   componentDidMount() {
     this.initialRender = () => {
       this.setState({
@@ -552,7 +622,7 @@ class App extends Component {
       schoolsToValue,
     } = this.state;
     const { handleAddEduc, handleDeleteEduc } = this;
-    const { handleExampleOutput } = this;
+    const { handleExampleOutput, handleResetOutput } = this;
     //
     return (
       <div className="App">
@@ -633,7 +703,7 @@ class App extends Component {
 
             <ReactToPrint
               trigger={() => {
-                return <Helper handleExampleOutput={handleExampleOutput} />;
+                return <Helper handleExampleOutput={handleExampleOutput} handleResetOutput={handleResetOutput} />;
               }}
               content={() => this.componentRef}
             />
