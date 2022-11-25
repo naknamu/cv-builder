@@ -12,6 +12,7 @@ can see an example cv and print or save it as PDF.
 - Allow saving as PDF
 - View an example CV
 - Allow user to add photo
+- Responsive design
 
 ### Sample CV Output demo
 ![sample cv](cv-builder.gif)
