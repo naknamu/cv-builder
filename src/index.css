@@ -64,8 +64,8 @@ body{
 
     .content .output-wrapper{
         display: grid;
-        grid-template-rows: 30mm 80mm;
-        transform: scale(.4) translateY(-75%) translateX(-70%);
+        grid-template-rows: 30mm 120mm;
+        transform: scale(.4) translateY(-75%) translateX(-75%);
         max-height: 400px;
         margin: 0 auto;
         width: 100%;
@@ -73,7 +73,7 @@ body{
 
     .output-wrapper .maincontent {
         display: grid;
-        grid-template-columns: 135mm 70mm;
+        grid-template-columns: 155mm 75mm;
     }
 
 }
