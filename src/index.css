@@ -41,7 +41,6 @@ body{
 /*testing*/
 @media only screen and (max-width: 600px) {
     html, body {
-      background-color: lightblue;
       width: 100%;
       overflow-x: hidden;
     }
