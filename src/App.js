@@ -349,6 +349,7 @@ class App extends Component {
   };
 
   handleExampleOutput = (e) => {
+    
     let ex_firstName = "John";
     let ex_lastName = "Doe";
     let ex_address = "123 Fake Street, Ph";
