@@ -38,6 +38,47 @@ body{
     align-items: flex-start;
 }
 
+/*testing*/
+@media only screen and (max-width: 600px) {
+    html, body {
+      background-color: lightblue;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .header{
+        margin-bottom: 20px;
+    }
+
+    .content {
+      flex-direction: column;
+      padding: 0;
+      max-width: 100%;
+      margin: 20px;
+      align-items: unset;
+      gap: 1em;
+    }
+
+    .date{
+      flex-direction: column;
+    }
+
+    .content .output-wrapper{
+        display: grid;
+        grid-template-rows: 30mm 80mm;
+        transform: scale(.4) translateY(-75%) translateX(-70%);
+        max-height: 400px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .output-wrapper .maincontent {
+        display: grid;
+        grid-template-columns: 135mm 70mm;
+    }
+
+}
+
 .inputColumn{
     display: flex;
     flex-direction: column;
