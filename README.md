@@ -2,8 +2,9 @@
 
 [View live website here!](https://naknamu.github.io/cv-builder/)
 
-This is the first project for react in The Odin Project's Javascript Course. A CV Builder that instantly updates upon user input.
-This app allows users to add or delete experience and education entries. There alse a button where users
+A CV Builder that instantly updates upon user input.  
+This application allows users to add or delete experience and education entries.  
+There is also a button where users
 can see an example cv and print or save it as PDF. 
 
 ## Features
@@ -16,3 +17,7 @@ can see an example cv and print or save it as PDF.
 
 ### Sample CV Output demo
 ![sample cv](cv-builder.gif)
+
+## Development
+### Web Framework
+- React
